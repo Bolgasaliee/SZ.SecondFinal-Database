@@ -3,5 +3,5 @@
 
 NOMORE.drawio : (MIMIC)draw.io 개체관계모델.  
 NOMORE-ERD-ppt.drawio : (MIMIC)포트폴리오에 사용할 본래의 개체관계모델.  
-NOMORE-ERD-use.drawio : (MIMIC)실제로 사용하는 개체관계모델. 정규화를 하지 않아 db를 몰라도 사용하기 용이함.  
+NOMORE-ERD-use.drawio : (MIMIC)정규화를 하지 않아 db를 몰라도 사용하기 용이함.  
 ERD : 포트폴리오에 사용할 개체관계모델.
