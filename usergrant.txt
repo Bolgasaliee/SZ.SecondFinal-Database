@@ -1,0 +1,7 @@
+conn system/1234;
+create user tp identified by 1234;
+grant connect to tp;
+grant unlimited tablespace to tp;
+grant create table to tp;
+grant drop any table to tp;
+grant create sequence to tp;
