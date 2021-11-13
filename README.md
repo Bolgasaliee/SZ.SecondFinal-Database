@@ -7,3 +7,4 @@ ERD.png : 포트폴리오에 사용할 개체 관계 모델 사진.
 NOMORE-ERD-ppt.drawio : MIMIC  
 NOMORE-ERD-use.drawio : MIMIC  
 NOMORE.drawio : (MIMIC)draw.io  
+usergrant.txt : Oracle 사용자 추가 및 권한 부여
