@@ -7,4 +7,5 @@ ERD.png : 포트폴리오에 사용할 개체 관계 모델 사진.
 MIMIC-ERD.drawio : 이해를 돕는 ERD 흉내.  
 MIMIC-use.drawio : 실제로 사용한 데이터 테이블.  
 MIMIC.drawio : draw.io에서 편집 가능한 MIMIC의 원본.  
+README.md : 설명 - 읽으세요.  
 usergrant.txt : Oracle 사용자 추가 및 권한 부여.  
