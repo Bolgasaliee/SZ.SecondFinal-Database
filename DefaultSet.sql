@@ -147,7 +147,7 @@ insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, bbs_hh, bbs_title
 --댓글 추가
 insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_reply) values(ApplyAIO_seq.nextVal, 0, sysdate, '도움이 되었어요. 감사합니다.', 2);
 --쪽지 추가
-insert into ApplyAIO(apply_id, ap_writer, ap_content, nt_status, ap_note) values(ApplyAIO_seq.nextVal, 0, '전체 쪽지입니다.', 1, 1);
+insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, nt_status, ap_note) values(ApplyAIO_seq.nextVal, 0, sysdate, '전체 쪽지입니다.', 1, 0);
 
 --메인 화면 전체 리스트 출력
 select pl_pc, pl_mobile, pl_console, gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR, gi_ravg from gameaio;
