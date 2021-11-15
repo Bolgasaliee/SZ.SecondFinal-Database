@@ -1,4 +1,10 @@
-conn system/1234;
+--관리자 아이디로 접속
+--conn system/1234;
+
+--오라클 12g 이상부터는 필수 적용
+--alter session set "_ORACLE_SCRIPT"=true;
+
+--사용자 생성 및 권한 부여
 create user tp identified by 1234;
 grant connect to tp;
 grant unlimited tablespace to tp;
