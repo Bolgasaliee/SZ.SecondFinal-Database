@@ -149,6 +149,24 @@ insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_reply) values(
 --쪽지 추가
 insert into ApplyAIO(apply_id, ap_writer, ap_content, nt_status, ap_note) values(ApplyAIO_seq.nextVal, 0, '전체 쪽지입니다.', 1, 1);
 
+--메인 화면 전체 리스트 출력
+select pl_pc, pl_mobile, pl_console, gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR, gi_ravg from gameaio;
+--게임 상세정보 출력
+select gi_img, pl_mobile, pl_console, gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR, gi_dev, gi_pub, gi_date, gi_ravg, gi_content from gameaio;
+--평점 분포
+select count(*) from applyaio where rv_star = 5;
+select count(*) from applyaio where rv_star = 4;
+select count(*) from applyaio where rv_star = 3;
+select count(*) from applyaio where rv_star = 2;
+select count(*) from applyaio where rv_star = 1;
+--전체 리뷰 리스트
+select ap_writer, mm_img, rv_star, ap_date, ap_content, rv_recommend, rv_like from memberaio, applyaio where ap_review != 0 and member_id = ap_writer;
+--내가 쓴 리뷰
+select rv_star, ap_content, rv_recommend from applyaio where ap_review != 0 and ap_writer = ?;
+--랭킹 핫이슈
+select gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR, gi_ravg from gameaio order by gi_views desc;
+--랭킹 추천순
+select gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR, gi_ravg from gameaio order by gi_like desc;
 
 --정리
 drop table ApplyAIO;
