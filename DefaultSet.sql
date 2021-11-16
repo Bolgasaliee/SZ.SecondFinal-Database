@@ -149,7 +149,7 @@ insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_reply) values(
 insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, nt_status, ap_note) values(ApplyAIO_seq.nextVal, 0, sysdate, '전체 쪽지입니다.', 1, 0);
 
 --메인 화면 전체 리스트 출력
-select game_id as GameId, gi_name as projectName, gi_dev as developer, gi_pub as provider, gi_date as releaseDate, gi_img as titleImg, gi_desc as Introduce, gi_like as likes, gi_views as views, pl_pc as pc, pl_console as console, pl_mobile as mobile, gn_action as action, gn_AnC as adventureAndCasual, gn_rpg as rolePlaying, gn_simul as simulation, gn_tactic as strategy, gn_SnR as sportsAndracing;
+select game_id as GameId, gi_name as projectName, gi_dev as developer, gi_pub as provider, gi_date as releaseDate, gi_img as titleImg, gi_desc as Introduce, gi_like as likes, gi_views as views, pl_pc as pc, pl_console as console, pl_mobile as mobile, gn_action as action, gn_AnC as adventureAndCasual, gn_rpg as rolePlaying, gn_simul as simulation, gn_tactic as strategy, gn_SnR as sportsAndracing from GameAIO;
 --평점 분포
 select count(*) from applyaio where rv_star = 5;
 select count(*) from applyaio where rv_star = 4;
