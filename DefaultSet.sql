@@ -11,8 +11,8 @@ gi_desc varchar2(450),
 gi_like number(1),
 gi_views number(1),
 pl_pc number(1),
-pl_console number(1),
 pl_mobile number(1),
+pl_console number(1),
 gn_action number(1),
 gn_AnC number(1),
 gn_rpg number(1),
@@ -149,9 +149,7 @@ insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_reply) values(
 insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, nt_status, ap_note) values(ApplyAIO_seq.nextVal, 0, sysdate, '전체 쪽지입니다.', 1, 0);
 
 --메인 화면 전체 리스트 출력
-select pl_pc as pc, pl_mobile as mobile, pl_console as console, gi_img as titleImg, gi_name as projectName, gn_action as action, gn_AnC as adventureAndcasual, gn_rpg as rolePlaying, gn_simul as simulation, gn_tactic as strategy, gn_SnR as sportsAndracing from gameaio;
---게임 상세정보 출력
-select gi_img, pl_mobile, pl_console, gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR, gi_dev, gi_pub, gi_date, gi_content from gameaio;
+select game_id as GameId, gi_name as projectName, gi_dev as developer, gi_pub as provider, gi_date as releaseDate, gi_img as titleImg, gi_desc as Introduce, gi_like as likes, gi_views as views, pl_pc as pc, pl_console as console, pl_mobile as mobile, gn_action as action, gn_AnC as adventureAndCasual, gn_rpg as rolePlaying, gn_simul as simulation, gn_tactic as strategy, gn_SnR as sportsAndracing;
 --평점 분포
 select count(*) from applyaio where rv_star = 5;
 select count(*) from applyaio where rv_star = 4;
