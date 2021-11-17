@@ -26,11 +26,11 @@ create sequence MemberAIO_seq increment by 1 start with 1;
 create table MemberAIO(
 member_id number(4) primary key,
 mm_email varchar2(40),
-mm_rt varchar2(20),
+mm_rt number(4),
 mm_pw varchar2(20),
 mm_name varchar2(50),
 mm_nickname varchar2(50) unique,
-mm_tel number(10) unique,
+mm_tel varchar2(30) unique,
 mm_img varchar2(255),
 mm_admin number(1)
 );
@@ -134,10 +134,10 @@ insert into GameAIO values(GameAIO_seq.nextVal, 'Yu-Gi-Oh! Duel Links', 'Konami 
 insert into GameAIO values(GameAIO_seq.nextVal, '던전앤파이터', 'Neople', 'Neople', '2016-08-09', 'https://cdn.cloudflare.steamstatic.com/steam/apps/495910/header.jpg?t=1603208855', '최후의 싸움에 대비하라! 던전 파이터 온라인은 웅대한 스토리라인과 RPG 요소를 갖춘 고전적인 2D 액션 게임이다! 14개의 다양한 수업 중 하나를 선택하고, 펀치, 슬래시, 슛 또는 승리의 길을 소환하면서 고대의 미스터리를 풀어보세요!', 0, 0, 1,0,0, 1,0,1,0,0,0);
 
 --회원 추가
-insert into MemberAIO values (0,'admin@account.com','email','password','관리자','어드민',01012345678,'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',1);
-insert into MemberAIO values (memberaio_seq.nextval,'first@account.com','email','firstpw','퍼스트','레이디퍼스트',01011111111,'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',0);
-insert into MemberAIO values (memberaio_seq.nextval,'second@account.com','email','secondpw','세컨드','기어세컨드',01022222222,'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',0);
-insert into MemberAIO values (memberaio_seq.nextval,'third@account.com','email','thirdpw','서드','서드파티',01033333333,'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',0);
+insert into MemberAIO values (0,'admin@account.com',0,'password','관리자','어드민','010-1234-5678','https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',1);
+insert into MemberAIO values (memberaio_seq.nextval,'first@account.com',0,'firstpw','퍼스트','레이디퍼스트','010-1111-1111','https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',0);
+insert into MemberAIO values (memberaio_seq.nextval,'second@account.com',0,'secondpw','세컨드','기어세컨드','010-2222-2222','https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',0);
+insert into MemberAIO values (memberaio_seq.nextval,'third@account.com',0,'thirdpw','서드','서드파티','010-3333-3333','https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',0);
 
 --리뷰 추가
 insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, rv_recommend, rv_star, rv_like, rv_dec, ap_review) values(ApplyAIO_seq.nextVal, 0, sysdate, '세투다 너무 재미있어요. 5점.', 1, 5, 9, 0, 1);
@@ -164,6 +164,9 @@ select rv_star, ap_content, rv_recommend from applyaio where ap_review != 0 and 
 select gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR from gameaio order by gi_views desc;
 --랭킹 추천순
 select gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR from gameaio order by gi_like desc;
+
+--회원 전체 리스트 출력
+select member_id as m_id, mm_email as m_email, mm_rt as rt_id, mm_pw as m_pw, mm_name as m_name, mm_nickname as m_nickname, mm_tel as m_tel, mm_img as m_img, mm_admin as m_admin from MemberAIO
 
 --정리
 drop table ApplyAIO;
