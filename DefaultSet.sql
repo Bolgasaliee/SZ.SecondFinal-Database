@@ -160,3 +160,6 @@ values(ApplyAIO_seq.nextVal, 0, SYSDATE, '대댓글 내용입니다', 1, 2, 3);
 --쪽지 추가
 insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_state, ap_note)
 values(ApplyAIO_seq.NEXTVAL, 0, SYSDATE, '쪽지 내용입니다', 1, 0);
+
+--COMMIT
+commit;
