@@ -1,3 +1,11 @@
+--전체 테이블 및 시퀸스 제거
+drop table ApplyAIO;
+drop table MemberAIO;
+drop table GameAIO;
+drop sequence GameAIO_seq;
+drop sequence MemberAIO_seq;
+drop sequence ApplyAIO_seq;
+
 --통합게임 테이블 및 시퀀스 생성
 create sequence GameAIO_seq increment by 1 start with 1;
 create table GameAIO(
@@ -152,11 +160,3 @@ values(ApplyAIO_seq.nextVal, 0, SYSDATE, '대댓글 내용입니다', 1, 2, 3);
 --쪽지 추가
 insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_state, ap_note)
 values(ApplyAIO_seq.NEXTVAL, 0, SYSDATE, '쪽지 내용입니다', 1, 0);
-
---정리
-drop table ApplyAIO;
-drop table MemberAIO;
-drop table GameAIO;
-drop sequence GameAIO_seq;
-drop sequence MemberAIO_seq;
-drop sequence ApplyAIO_seq;
