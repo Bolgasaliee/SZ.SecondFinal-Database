@@ -8,8 +8,8 @@ gi_pub varchar2(90),
 gi_date date,
 gi_img varchar2(255),
 gi_desc varchar2(450),
-gi_like number(1),
-gi_views number(1),
+gi_like number(4),
+gi_views number(5),
 pl_pc number(1),
 pl_mobile number(1),
 pl_console number(1),
@@ -43,21 +43,20 @@ ap_writer number(4),
 foreign key (ap_writer) references MemberAIO(member_id) on delete cascade,
 ap_date date,
 ap_content varchar2(900),
-rv_recommend number(1),
+ap_state number(1),
+ap_like number(4),
+rv_reco number(1),
 rv_star number(1),
-rv_like number(4),
 rv_dec number(4),
-bbs_bt varchar2(20),
 bbs_hh varchar2(20),
 bbs_title varchar2(300),
-nt_status number(1),
+bbs_views number(5),
 ap_review number(4),
-ap_bulletboard number(4),
+ap_bbs number(4),
 ap_reply number(4),
 ap_rreply number(4),
 ap_note number(4)
 );
-
 
 --게임 추가
 insert into GameAIO values(GameAIO_seq.nextVal, '7 Days to Die', 'The Fun Pimps', 'The Fun Pimps Entertainment LLC', '2013-12-14', 'https://cdn.akamai.steamstatic.com/steam/apps/251570/header.jpg?t=1614101602', '7 Days to Die는 1인칭 슈팅, 서바이벌 호러, 타워 방어, 롤플레잉 게임의 독특한 조합인 오픈 월드 게임이다. 먼저 나온 결정적인 좀비 서바이벌 샌드박스 RPG를 플레이하세요. 나베스가네가 기다리고 있다!', 0, 0, 1,0,1, 0,1,0,1,0,0);
@@ -140,33 +139,19 @@ insert into MemberAIO values (memberaio_seq.nextval,'second@account.com',0,'seco
 insert into MemberAIO values (memberaio_seq.nextval,'third@account.com',0,'thirdpw','서드','서드파티','010-3333-3333','https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',0);
 
 --리뷰 추가
-insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, rv_recommend, rv_star, rv_like, rv_dec, ap_review) values(ApplyAIO_seq.nextVal, 0, sysdate, '세투다 너무 재미있어요. 5점.', 1, 5, 9, 0, 1);
+insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_state, ap_like, rv_reco, rv_star, rv_dec, ap_review)
+values(ApplyAIO_seq.NEXTVAL, 0, SYSDATE, '리뷰 내용입니다', 1, 0, 1, 5, 0, 1);
 --게시글 추가
-insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, bbs_hh, bbs_title, ap_bulletboard) values(ApplyAIO_seq.nextVal, 0, sysdate, '세투다 공략입니다. 게임 시작하면...', '정보', '세투다 공략', 1);
+insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_state, ap_like, bbs_hh, bbs_title, bbs_views, ap_bbs)
+values(ApplyAIO_seq.NEXTVAL, 0, SYSDATE, '게시글 내용입니다', 1, 0, '말머리', '게시글 제목', 0, 1);
 --댓글 추가
-insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_reply) values(ApplyAIO_seq.nextVal, 0, sysdate, '도움이 되었어요. 감사합니다.', 2);
+insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_state, ap_reply, ap_rreply)
+values(ApplyAIO_seq.NEXTVAL, 0, SYSDATE, '댓글 내용입니다', 1, 2, ApplyAIO_seq.CURRVAL);
+insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_state, ap_reply, ap_rreply)
+values(ApplyAIO_seq.nextVal, 0, SYSDATE, '대댓글 내용입니다', 1, 2, 3);
 --쪽지 추가
-insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, nt_status, ap_note) values(ApplyAIO_seq.nextVal, 0, sysdate, '전체 쪽지입니다.', 1, 0);
-
---메인 화면 전체 리스트 출력
-select game_id as GameId, gi_name as projectName, gi_dev as developer, gi_pub as provider, gi_date as releaseDate, gi_img as titleImg, gi_desc as Introduce, gi_like as likes, gi_views as views, pl_pc as pc, pl_console as console, pl_mobile as mobile, gn_action as action, gn_AnC as adventureAndCasual, gn_rpg as rolePlaying, gn_simul as simulation, gn_tactic as strategy, gn_SnR as sportsAndracing from GameAIO;
---평점 분포
-select count(*) from applyaio where rv_star = 5;
-select count(*) from applyaio where rv_star = 4;
-select count(*) from applyaio where rv_star = 3;
-select count(*) from applyaio where rv_star = 2;
-select count(*) from applyaio where rv_star = 1;
---전체 리뷰 리스트
-select ap_writer, mm_img, rv_star, ap_date, ap_content, rv_recommend, rv_like from memberaio, applyaio where ap_review != 0 and member_id = ap_writer;
---내가 쓴 리뷰
-select rv_star, ap_content, rv_recommend from applyaio where ap_review != 0 and ap_writer = ?;
---랭킹 핫이슈
-select gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR from gameaio order by gi_views desc;
---랭킹 추천순
-select gi_img, gi_name, gn_action, gn_AnC, gn_rpg, gn_simul, gn_tactic, gn_SnR from gameaio order by gi_like desc;
-
---회원 전체 리스트 출력
-select member_id as m_id, mm_email as m_email, mm_rt as rt_id, mm_pw as m_pw, mm_name as m_name, mm_nickname as m_nickname, mm_tel as m_tel, mm_img as m_img, mm_admin as m_admin from MemberAIO
+insert into ApplyAIO(apply_id, ap_writer, ap_date, ap_content, ap_state, ap_note)
+values(ApplyAIO_seq.NEXTVAL, 0, SYSDATE, '쪽지 내용입니다', 1, 0);
 
 --정리
 drop table ApplyAIO;
